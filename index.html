@@ -22,7 +22,7 @@
 
    function onSuccessFunction(fs) {
 navigator.notification.alert("Accessing " + fs.name + " storage (" +
-fs.root.fullPath + ")");
+fs.root.toURL + ")");
 //Do something with the file system (fs) here
 }
 	    function onFileError(e) {

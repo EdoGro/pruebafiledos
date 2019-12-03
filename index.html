@@ -19,7 +19,7 @@
     function onFileSystemSuccess(fileSystem) {
         navigator.notification.alert(fileSystem.name);
         navigator.notification.alert(fileSystem.root.name);
-       navigator.notification.alert(fileSystem.root.fullPath);
+       navigator.notification.alert(fileSystem.fullPath);
     }
 
     function fail(evt) {

@@ -9,7 +9,8 @@
 
     // Wait for device API libraries to load
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
+       function onBodyLoad(){
+    document.addEventListener("deviceready", onDeviceReady, false);}
 
     // device APIs are available
     //
@@ -72,7 +73,7 @@ navigator.notification.alert(msgText, null, "File Error");
 
     </script>
   </head>
-  <body>
+  <body onload="onBodyLoad()">
     <h1>Example</h1>
     <section id="dirList" data-role="page" data-add-back-btn="true">
 <header data-role="header">

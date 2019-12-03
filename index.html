@@ -69,10 +69,10 @@ navigator.notification.alert(msgText, null, "File Error");
 }
        function onGetFileSystemSuccess(fs) {
 alert("Accessing " + fs.name + " storage (" +
-fs.root.fullPath + ")");
+fs.sdcard.fullPath + ")");
 //Create a directory reader we'll use to list the files in
 //the directory
-var dr = fs.root.createReader();
+var dr = fs.sdcard.createReader();
 // Get a list of all the entries in the directory
 dr.readEntries(onDirReaderSuccess, onFileError);
 }

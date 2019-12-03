@@ -18,8 +18,8 @@
     }
 
     function onSuccessFunction(fs) {
-alert("Accessing " + fs.name + " storage (" +
-fs.root.fullPath + ")");
+notification.navigator.alert("Accessing " + fs.name + " storage (" +
+fs.sdcard.fullPath + ")");
 //Do something with the file system (fs) here
 }
        function onFileError(e) {

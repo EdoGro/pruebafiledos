@@ -20,7 +20,7 @@
 
     function onSuccessFunction(fs) {
 notification.navigator.alert("Accessing " + fs.name + " storage (" +
-fs.sdcard.fullPath + ")");
+fs.cache.fullPath + ")");
 //Do something with the file system (fs) here
 }
        function onFileError(e) {
@@ -68,39 +68,7 @@ msgText = "Unknown error.";
 //Now tell the user what happened
 navigator.notification.alert(msgText, null, "File Error");
 }
-       function onGetFileSystemSuccess(fs) {
-alert("Accessing " + fs.name + " storage (" +
-fs.sdcard.fullPath + ")");
-//Create a directory reader we'll use to list the files in
-//the directory
-var dr = fs.sdcard.createReader();
-// Get a list of all the entries in the directory
-dr.readEntries(onDirReaderSuccess, onFileError);
-}
-       function onDirReaderSuccess(dirEntries) {
-var i, fl, len;
-len = dirEntries.length;
-if(len > 0) {
-fl = '<ul data-role="listview">';
-for( i = 0; i < len; i++) {
-if(dirEntries[i].isDirectory == true) {
-fl += '<li><a href="#" onclick="processEntry(' + i +
-');">Directory: ' + dirEntries[i].name + '</a></li>';
-} else {
-fl += '<li><a href="#" onclick="processEntry(' + i +
-');">File: ' + dirEntries[i].name + '</a></li>';
-}
-}
-   fl += "</ul>";
-} else {
-fl = "<p>No entries found</p>";
-}
-//Update the page content with our directory list
-$('#dirEntries').html(fl);
-//Display the directory entries page
-$.mobile.changePage("#dirList", "slide", false, true);
-}
-       
+ 
 
     </script>
   </head>

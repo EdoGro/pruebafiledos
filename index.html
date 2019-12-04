@@ -70,8 +70,8 @@ navigator.notification.alert(msgText, null, "File Error");
 }
  
        function onGetFileSystemSuccess(fs) {
-alert("Accessing " + fs.name + " storage (" +
-fs.root.fullPath + ")");
+alert("Funcion 2: Accessing " + fs.name + " storage (" +
+fs.cache.fullPath + ")");
 //Create a directory reader we'll use to list the files in
 //the directory
 var dr = fs.root.createReader();

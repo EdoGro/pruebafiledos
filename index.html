@@ -7,20 +7,19 @@
       <script type="text/javascript" charset="utf-8" src="jquery-1.6.4.min.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-    // Wait for device API libraries to load
-    //
-       function onBodyLoad(){
-    document.addEventListener("deviceready", onDeviceReady, false);}
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        window.requestFileSystem(LocalFileSystem.TEMPORARY,
+    function onBodyLoad() {
+                //Add the PhoneGap deviceready event listener
+                document.addEventListener("deviceready", onDeviceReady,false);
+            }
+            function onDeviceReady() {
+                //Get a handle to the results area of the page
+                //we'll need it later
+                window.requestFileSystem(LocalFileSystem.TEMPORARY,
 5242880, onSuccessFunction, onFileError);
-    }
-
-    function onSuccessFunction(fs) {
-notification.navigator.alert("Accessing " + fs.name + " storage (" +
+            }
+       
+       function onSuccessFunction(fs) {
+alert("Accessing " + fs.name + " storage (" +
 fs.root.fullPath + ")");
 //Do something with the file system (fs) here
 }
@@ -75,18 +74,5 @@ navigator.notification.alert(msgText, null, "File Error");
   </head>
   <body onload="onBodyLoad()">
     <h1>Example</h1>
-    <section id="dirList" data-role="page" data-add-back-btn="true">
-<header data-role="header">
-<h1>File API Demo</h1>
-<a onclick="writeFile();" data-icon="plus"
-class="ui-btn-right">Write</a>
-</header>
-<div data-role="content">
-<p>File system contents:</p>
-<div id="dirEntries"></div>
-<hr />
-<div id="writeInfo"></div>
-</div>
-</section>
   </body>
 </html>

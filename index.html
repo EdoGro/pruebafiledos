@@ -15,12 +15,12 @@
                 //Get a handle to the results area of the page
                 //we'll need it later
                 window.requestFileSystem(LocalFileSystem.TEMPORARY,
-5242880, onSuccessFunction, onFileError);
+5242880, onGetFileSystemSuccess, onFileError);
             }
        
        function onSuccessFunction(fs) {
 alert("Accessing " + fs.name + " storage (" +
-fs.sdcard.fullPath + ")");
+fs.root.fullPath + ")");
 //Do something with the file system (fs) here
 }
        function onFileError(e) {
@@ -69,10 +69,55 @@ msgText = "Unknown error.";
 navigator.notification.alert(msgText, null, "File Error");
 }
  
+       function onGetFileSystemSuccess(fs) {
+alert("Accessing " + fs.name + " storage (" +
+fs.root.fullPath + ")");
+//Create a directory reader we'll use to list the files in
+//the directory
+var dr = fs.root.createReader();
+// Get a list of all the entries in the directory
+dr.readEntries(onDirReaderSuccess, onFileError);
+}
+       function onDirReaderSuccess(dirEntries) {
+var i, fl, len;
+len = dirEntries.length;
+if(len > 0) {
+fl = '<ul data-role="listview">';
+for( i = 0; i < len; i++) {
+if(dirEntries[i].isDirectory == true) {
+fl += '<li><a href="#" onclick="processEntry(' + i +
+');">Directory: ' + dirEntries[i].name + '</a></li>';
+} else {
+fl += '<li><a href="#" onclick="processEntry(' + i +
+');">File: ' + dirEntries[i].name + '</a></li>';
+}
+}
+   fl += "</ul>";
+} else {
+fl = "<p>No entries found</p>";
+}
+//Update the page content with our directory list
+$('#dirEntries').html(fl);
+//Display the directory entries page
+$.mobile.changePage("#dirList", "slide", false, true);
+}
 
     </script>
   </head>
   <body onload="onBodyLoad()">
     <h1>Example</h1>
+     <section id="dirList" data-role="page" data-add-back-btn="true">
+<header data-role="header">
+<h1>File API Demo</h1>
+<a onclick="writeFile();" data-icon="plus"
+class="ui-btn-right">Write</a>
+</header>
+<div data-role="content">
+<p>File system contents:</p>
+<div id="dirEntries"></div>
+<hr />
+<div id="writeInfo"></div>
+</div>
+</section>
   </body>
 </html>
